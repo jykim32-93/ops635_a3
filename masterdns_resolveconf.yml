@@ -1,0 +1,12 @@
+-hosts: jykim32.ops
+ tasks:
+ - name: Copy resolv conf 
+   template:
+    src: masterdns_resolveconf.conf
+    dest: /etc/resolv.conf
+    owner: root
+    group: named
+    mode: 0660
+   notify: restart named
+ 
+ 

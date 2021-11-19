@@ -1,0 +1,10 @@
+-hosts: slavedns.jykim32.ops
+ tasks:
+ - name: Set up Bind
+   hosts: 192.168.12.6
+   gather_facts: true
+   user: root
+   become: true
+  
+   roles:
+    - bind

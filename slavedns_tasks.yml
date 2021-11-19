@@ -1,0 +1,31 @@
+-hosts: ansible_vm1.jykim32.ops
+ tasks:
+ - name: Install Bind
+   yum:
+    pkg: bind
+    state: installed
+ - name: Install Bind-utils
+   yum:
+    pkg: bind-utils
+    state: installed
+ - name: Set hostname
+   hostname:
+    name: slavedns.jykim32.ops
+ - name: Set hostname fact
+   set_fact:
+    ansible_fqdn: slavedns.jykim32.ops
+ - name: Copy named conf file
+   template:
+    src: slavedns_named.conf
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode: 0660
+   notify: restart named
+ - name: Firewall enable dns service
+   firewalld:
+    service: dns
+    permanent: true
+    state: enabled
+    immediate: yes
+

@@ -1,0 +1,51 @@
+-hosts: ansible_server.jykim32.ops
+ tasks:
+ - name: Install Bind
+   yum:
+    pkg: bind
+    state: installed
+ - name: Set hostname
+   hostname:
+    name: jykim32.ops
+ - name: Set hostname fact
+   set_fact:
+    ansible_fqdn: jykim32.ops
+ - name: Make named directory
+   file:
+    path: /etc/named
+    state: directory
+    owner: root
+    group: named
+    mode: 0750
+ - name: Copy named conf file
+   template:
+    src: masterdns_named.conf
+    dest: /etc/named.conf
+    owner: root
+    group: named
+    mode: 0660
+   notify: restart named
+ - name: Copy forward file
+   template:
+    src: masterdns.forward.zone
+    dest: /var/named/masterdns.forward.zone
+    owner: root
+    group: named
+    mode: 0640
+   notify: restart named
+ - name: Copy reverse file
+   template:
+    src: masterdns.reverse.zone
+    dest: /var/named/masterdns.reverse.zone
+    owner: root
+    group: named
+    mode: 0640
+   notify: restart named
+ - name: Firewall enable dns service
+   firewalld:
+    service: dns
+    permanent: true
+    state: enabled
+    immediate: yes
+   
+

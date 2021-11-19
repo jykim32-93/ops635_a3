@@ -1,0 +1,13 @@
+$TTL    3D
+@       IN      SOA     host.jykim32.ops.      hostmaster.jykim32.ops.(
+                2018042901       ; Serial
+                8H      ; Refresh
+                2H      ; Retry
+                1W      ; Expire
+                1D      ; Negative Cache TTL
+);
+@       	IN      NS      host.jykim32.ops.
+host    	IN      A       192.168.12.5
+slavedns 	IN	A 	192.168.12.6
+ansible_vm2	IN	A	192.168.12.7
+ansible_vm3	IN	A	192.168.12.8

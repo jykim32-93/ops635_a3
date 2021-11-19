@@ -1,0 +1,8 @@
+ansible_server.jykim32.ops
+ansible_vm1.jykim32.ops
+jykim32.ops
+slavedns.jkykim32.ops
+
+[client]
+ansible_vm2.jykim32.ops
+ansible_vm3.jykim32.ops

@@ -1,0 +1,8 @@
+-hosts: client
+ tasks:
+ - name: Firewall enable dns service for client VMs
+   firewalld:
+    service: dns
+    permanent: true
+    state: enabled
+    immediate: yes
